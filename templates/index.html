@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Removal</title>
+</head>
+<body>
+    <h1>Upload an image to remove the background</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png, .jfif, .webp" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if error_message %}
+        <h3 style="color: red;">Error: {{ error_message }}</h3>
+    {% endif %}
+
+    {% if uploaded_image %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image" width="300">
+    {% endif %}
+
+    {% if result_image %}
+        <h2>Processed Result:</h2>
+        <img src="{{ url_for('static', filename='results/' + result_image) }}" alt="Processed Image" width="300">
+    {% endif %}
+</body>
+</html>
